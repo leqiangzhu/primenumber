@@ -1,28 +1,40 @@
-var isPalidrome = function(txt) {
-  var txtArray = txt.split("");
-  var halfCount = (txtArray.length) / 2;
-  var firstHalf = txtArray.slice(0,halfCount);
-  if (txtArray.length % 2 === 0) { //even
-    var lastHalf = txtArray.slice(halfCount);
-  } else { //odd
-    var lastHalf = txtArray.slice(halfCount + 1);
+var primeArray = [2];
+
+var isPrime = function(inputNumber) {
+  var numArray = [];
+  //make first array of all potential prime numbers
+  for (i=2;i<inputNumber;i++) {
+    numArray.push(i);
   }
-  var lastHalf = lastHalf.reverse();
-  if (firstHalf.toString() === lastHalf.toString()) {
-    return true;
-  } else {
-    return false;
-  }
+  var updatedArray = [];
+  var loop = numArray.length;
+  //remove multiples of the first prime number
+  for(x=0;updatedArray.length <= 1;x++) {
+
+    for (i=0;i<=loop;i++) {
+      if (numArray[i] % primeArray[x] !== 0) {
+        updatedArray.push(numArray[i]);
+      }
+    };
+    // alert("e" + even + " o " + odd);
+    // alert(numArray + " . " + updatedArray);
+    loop = updatedArray.length;
+    return updatedArray;
+    primeArray.push(updatedArray[0]);
+  };
 };
+
+// updatedArray.splice(0);
+
+
 
 
 $(document).ready(function() {
 
-  $("#palidrome-method").submit(function(event) {
+  $("#prime-method").submit(function(event) {
 
-    var phrase = $("input#txtInput").val();
-    var phrase = phrase.toLowerCase();
-    var output = isPalidrome(phrase);
+    var userInput = $("#numInput").val();
+    var output = isPrime(userInput);
     alert(output);
     event.preventDefault();
   });
